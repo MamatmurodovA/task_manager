@@ -27,7 +27,7 @@
       <div class="sidebar-heading">Task manager</div>
       <div class="list-group list-group-flush">
         <?php echo url('Task list', 'home', 'index', array('class' => 'list-group-item list-group-item-action bg-light')); ?>  
-        <?php echo url('Create task', 'task', 'index', array('class' => 'list-group-item list-group-item-action bg-light')); ?>  
+        <?php echo url('Create task', 'task', 'create', array('class' => 'list-group-item list-group-item-action bg-light')); ?>  
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -44,21 +44,18 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Profile
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <?php if(isset($user) && $user->id): ?>
+                  <?php echo url('Tasks', 'home', 'index', array('class' => 'dropdown-item')); ?>  
+                  <div class="dropdown-divider"></div>
+                  <?php echo url('Logout', 'home', 'logout', array('class' => 'dropdown-item')); ?>  
+                <?php else: ?>
+                  <?php echo url('Login', 'home', 'login', array('class' => 'dropdown-item')); ?>  
+                <?php endif; ?>
               </div>
             </li>
           </ul>

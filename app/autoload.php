@@ -11,6 +11,8 @@ class App
 {
     public function run()
     {
+        session_start();
+        
         new Controller();        
     }
 }

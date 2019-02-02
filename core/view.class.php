@@ -16,6 +16,10 @@ class View
             if ( is_array( $args ) ){
                 extract( $args );
             }
+            if (isset($_SESSION['user']))
+            {
+                $user = $_SESSION['user'];
+            }
             if (isset($title))
             {
                 $page_title = $title;
@@ -38,7 +42,7 @@ class View
         }
         else
         {
-            return "View not found";
+            return "Sorry, View not found";
         }
     }
     public function template($view_name, $args)
@@ -47,7 +51,10 @@ class View
         $file_path = "app/views/${view_name}.html.php";
         
         ob_start();
-
+        if (isset($_SESSION['user']))
+        {
+            $user = $_SESSION['user'];
+        }
         if ( is_array( $args ) ){
             extract( $args );
         }

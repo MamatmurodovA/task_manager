@@ -33,7 +33,7 @@ class BaseORM
         $row = $result->fetchArray(SQLITE3_ASSOC);
         if ($row)
         {
-            return $row;
+            return (object)$row;
         }
         return null;
             // print_r($a);
@@ -55,11 +55,47 @@ class BaseORM
     }
     public function create(array $data)
     {
-        
+        $insert_sql = "INSERT INTO $this->table_name";
+        $keys_str = "(";
+        $values_str = "(";
+        $i = 0;  $comma = ",";
+        foreach($data as $key => $value)
+        {
+            if (count($data)-1 == $i)
+            {
+                $comma = "";
+            }
+            
+            $keys_str .= $key. $comma;
+            $value = str_replace("'", "", $value);
+            $values_str .= "'$value'" . $comma;
+            $i++;
+        }
+        $keys_str .= ")";
+        $values_str .= ")";
+        $insert_sql .= $keys_str . " VALUES" . $values_str;
+        echo $insert_sql;
+        $this->db->exec($insert_sql);
     }
-    public function update(array $date, $conditions)
+    public function update($id,array  $data)
     {
-
+        $update_sql = "UPDATE $this->table_name SET ";
+        $values_str = "";
+        $i = 0;  $comma = ",";
+        foreach($data as $key => $value)
+        {
+            if (count($data)-1 == $i)
+            {
+                $comma = "";
+            }
+            
+            $value = str_replace("'", "", $value);
+            $values_str .= "$key='$value'" . $comma;
+            $i++;
+        }
+        
+        $update_sql .= $values_str . " WHERE id=$id";
+        $this->db->exec($update_sql);
     }
     public function delete($conditions)
     {
