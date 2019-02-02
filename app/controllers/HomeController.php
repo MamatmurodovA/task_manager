@@ -9,10 +9,8 @@ class HomeController
 
     public function index()
     {
-        $user = new User();
-        $user->get(1);
         $view = new View();
-        return $view->render('home', array('title' => 'Home page'));
+        return $view->render('home', array('page_title' => 'Home page', 'content' => 'Test content'));
     }
 
 }

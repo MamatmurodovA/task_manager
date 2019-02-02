@@ -2,9 +2,11 @@
 
 namespace base\ORM;
 
+use SQLite3;
 
 interface ORM 
 {
+    function connect();
     function get($id);
     function query($query);
     
@@ -21,9 +23,11 @@ interface ORM
 class BaseORM implements ORM
 {
     public $table_name = '';
+    protected $db;
     
     public function __construct()
     {
+        $this->connect();
         $class_name = get_called_class();
         if(strpos($class_name, '\\') !== false)
         {
@@ -31,17 +35,30 @@ class BaseORM implements ORM
             $class_arr = explode("\\", $class_name);
             $class_name = end($class_arr);
         }
-        $this->table_name = $class_name;
+        $this->table_name = strtolower($class_name);
     }
-
+    public function connect(){
+        $db = new SQLite3('app/task_manager.db');
+        $this->db = $db;
+        
+    }
     public function get($id)
     {
-        $table_name = $this->table_name;
-        echo "table name is ${table_name}<br>";
+        $result = $this->db->query("select * from $this->table_name where id=$id");
+        $row = $result->fetchArray(SQLITE3_ASSOC);
+        if ($row)
+        {
+            return $row;
+        }
+        return null;
+            // print_r($a);
+        // }
+        // return $result->fetchRow();
     }
     public function query($query)
     {
-
+        $result = pg_query($this->db, "select * from $this->table_name where id=$id");
+        return $result;
     }
     public function create(array $data)
     {

@@ -1,1 +1,1 @@
-Hello my home
+<?php include 'base.php'; ?>
