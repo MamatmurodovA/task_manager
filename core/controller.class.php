@@ -7,7 +7,7 @@ class Controller
     
     public function __construct()
     {
-
+    
         $page_name = (isset($_GET['page']))? $_GET['page'] : 'default';
 
         $controller_name =  ucfirst(strtolower($page_name));
