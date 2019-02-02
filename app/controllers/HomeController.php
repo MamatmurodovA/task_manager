@@ -14,7 +14,12 @@ class HomeController
     {
         $view = new View();
         $task_model = new Task();
-        $task_list = $task_model->query("select * from task");
+        $order_by = 'id';
+        if (isset($_GET['orderby']))
+        {
+            $order_by = $_GET['orderby'];
+        }
+        $task_list = $task_model->query("select * from task order by $order_by");
         
         return $view->render('home', array('page_title' => $this->page_title, 'tasks' => $task_list));
     }
