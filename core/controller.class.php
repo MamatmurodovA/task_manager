@@ -1,14 +1,15 @@
 <?php
-
-
 class Controller
 {
     public function __construct()
     {
-        $page_name = ucfirst(strtolower($_GET['page']));
-        $class_name = "${page_name}Controller";
-        $class_path = "controllers/${class_name}.php";
 
+        $page_name = (isset($_GET['page']))? $_GET['page'] : 'default';
+        $controller_name =  ucfirst(strtolower($page_name));
+        $class_name = "${controller_name}Controller";
+        
+        $class_path = "controllers/${class_name}.php";
+        
         if (realpath($class_path))
         {
             include $class_path;
@@ -23,6 +24,11 @@ class Controller
                 $obj->$method_name();
             }
         }
+        else
+        {
+            echo "Page not found";
+        }
+        
 
     }
 }
