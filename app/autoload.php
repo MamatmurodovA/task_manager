@@ -13,3 +13,16 @@ class App
         new Controller();        
     }
 }
+
+function url($title, $controller_name, $method_name, $args=null)
+{
+    $attrs = "";
+    if(isset($args))
+    {
+        foreach($args as $key=>$arg)
+        {
+            $attrs .= "$key='".$arg."'";
+        }
+    }
+    return "<a href='?page=${controller_name}&method=${method_name}' $attrs>". $title."</a>";
+}

@@ -57,8 +57,17 @@ class BaseORM implements ORM
     }
     public function query($query)
     {
-        $result = pg_query($this->db, "select * from $this->table_name where id=$id");
-        return $result;
+        $rows = array();
+        $i = 0;
+        $result = $this->db->query($query);
+        while($res = $result->fetchArray(SQLITE3_ASSOC))
+        {
+            
+            $rows[$i]['id'] = $res['id']; 
+            $rows[$i]['username'] = $res['username']; 
+            $i++;
+        }
+        return $rows;
     }
     public function create(array $data)
     {

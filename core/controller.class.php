@@ -3,6 +3,8 @@ namespace base\controllers;
 
 class Controller
 {
+    public $page_title;
+    
     public function __construct()
     {
 
@@ -35,5 +37,6 @@ class Controller
         
 
     }
+
 }
 ?>
