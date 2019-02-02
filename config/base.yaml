@@ -1,0 +1,7 @@
+
+# Database configuration
+db_params:
+  client: 'postgresql'
+  name: 'task_manager'
+  user: 'task_manager'
+  passwd: 'task_manager'
