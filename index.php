@@ -2,8 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-define('ROOT_DIR', __DIR__);
+require_once('app/autoload.php');
 
-include 'core/controller.class.php';
-
-$cntr = new Controller();
+$app = new App();
+$app->run();
