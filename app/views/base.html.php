@@ -24,9 +24,10 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Start Bootstrap </div>
+      <div class="sidebar-heading">Task manager</div>
       <div class="list-group list-group-flush">
         <?php echo url('Task list', 'home', 'index', array('class' => 'list-group-item list-group-item-action bg-light')); ?>  
+        <?php echo url('Create task', 'task', 'index', array('class' => 'list-group-item list-group-item-action bg-light')); ?>  
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -65,9 +66,9 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">
+        <h3 class="mt-4 text-center">
           <?php echo $page_title; ?>
-        </h1>
+        </h3>
         <?php echo $content; ?>
       </div>
       

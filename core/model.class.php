@@ -4,23 +4,8 @@ namespace base\ORM;
 
 use SQLite3;
 
-interface ORM 
-{
-    function connect();
-    function get($id);
-    function query($query);
-    
-    function create(array $data);
-    
-    function update(array $data, $conditions);
-    
-    function delete($conditions);
-    
-    function countRows();
-    
-    function getAffectedRows();
-}
-class BaseORM implements ORM
+
+class BaseORM
 {
     public $table_name = '';
     protected $db;
@@ -63,8 +48,7 @@ class BaseORM implements ORM
         while($res = $result->fetchArray(SQLITE3_ASSOC))
         {
             
-            $rows[$i]['id'] = $res['id']; 
-            $rows[$i]['username'] = $res['username']; 
+            $rows[$i] = $res; 
             $i++;
         }
         return $rows;

@@ -1,11 +1,10 @@
 <?php
 namespace ORM\Models;
 
-
 use base\ORM\BaseORM;
 
 
-class User extends BaseORM
+class Task extends BaseORM
 {
     /** 
      * fields

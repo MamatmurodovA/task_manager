@@ -1,9 +1,10 @@
 <?php
 
 include 'app/models/User.php';
+include 'app/models/Task.php';
 
 use base\view\View;
-use ORM\Models\User;
+use ORM\Models\Task;
 
 class HomeController
 {   
@@ -12,10 +13,10 @@ class HomeController
     public function index()
     {
         $view = new View();
-        $users = new User;
-        $user_list = $users->query("select * from User");
+        $task_model = new Task();
+        $task_list = $task_model->query("select * from task");
         
-        return $view->render('home', array('page_title' => $this->page_title, 'users' => $user_list));
+        return $view->render('home', array('page_title' => $this->page_title, 'tasks' => $task_list));
     }
 
 }

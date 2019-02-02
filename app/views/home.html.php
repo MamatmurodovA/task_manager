@@ -2,13 +2,13 @@
     <table class="table">
         <tr>
             <th>Id</th>
-            <th>Username</th>
-            <th>E-mail</th>
-            <th>Status</th>
+            <th><?php echo url('Username', 'home', 'index', array('query' => 'orderby=username')); ?></th>
+            <th><?php echo url('Email', 'home', 'index', array('query' => 'orderby=email')); ?></th>
+            <th><?php echo url('Status', 'home', 'index', array('query' => 'orderby=status')); ?></th>
         </tr>
-        <?php foreach($users as $user): ?>
-            <th><?php echo $user['id']; ?></th>
-            <th><?php echo $user['username']; ?></th>
+        <?php foreach($tasks as $task): ?>
+            <th><?php echo $task['id']; ?></th>
+            <th><?php echo $task['username']; ?></th>
             <th>E-mail</th>
             <th>Status</th>
         <?php endforeach; ?>

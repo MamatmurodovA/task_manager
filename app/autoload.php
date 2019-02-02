@@ -2,6 +2,7 @@
 
 include 'core/view.class.php';
 include 'core/controller.class.php';
+include 'core/model.class.php';
 
 use base\controllers\Controller;
 
@@ -17,12 +18,20 @@ class App
 function url($title, $controller_name, $method_name, $args=null)
 {
     $attrs = "";
+    $query = "";
     if(isset($args))
     {
         foreach($args as $key=>$arg)
         {
-            $attrs .= "$key='".$arg."'";
+            if ($key == 'query')
+            {
+                $query .= $arg;
+            }
+            else
+            {
+                $attrs .= "$key='".$arg."'";
+            }
         }
     }
-    return "<a href='?page=${controller_name}&method=${method_name}' $attrs>". $title."</a>";
+    return "<a href='?page=${controller_name}&method=${method_name}&$query' $attrs>". $title."</a>";
 }
