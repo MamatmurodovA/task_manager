@@ -34,13 +34,13 @@ class TaskController
         if ($_SERVER["REQUEST_METHOD"] == 'POST')
         {
             $data = $_REQUEST;
-            if (isset($data['id']) && isset($data['username']) && isset($data['email']) && isset($data['description']) && isset($data['status']))
+            if (isset($data['id']) && isset($data['username']) && isset($data['email']) && isset($data['description']))
             {
                 $id = $data['id'];
                 $username = $data['username'];
                 $email = $data['email'];
                 $description = $data['description'];
-                $status = $data['status'];
+                $status = (isset($data['status']) && $data['status'] == 'on')? 1 : 0;
 
                 $task_model->update($id, array(
                     'username' => $username, 
@@ -48,6 +48,7 @@ class TaskController
                     'description' => $description, 
                     'status' => $status
                 ));
+                header('Location: /');
             }
         }
         $view = new View();

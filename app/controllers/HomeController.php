@@ -19,9 +19,15 @@ class HomeController
         {
             $order_by = $_GET['orderby'];
         }
+
+        $paginate_by = 3;
+        $current_page_num = (isset($_GET['page_num']))? $_GET['page_num'] : 1;
+        $offset_num = ($current_page_num - 1) * $paginate_by;  
         $task_list = $task_model->query("select * from task order by $order_by");
+
+        $total_page_count = (int)(count($task_list) / $paginate_by) + 1;
         
-        return $view->render('home', array('page_title' => $this->page_title, 'tasks' => $task_list));
+        return $view->render('home', array('page_title' => $this->page_title, 'tasks' => array_slice($task_list, $offset_num, $paginate_by), 'total_page_count' => $total_page_count));
     }
     public function login()
     {

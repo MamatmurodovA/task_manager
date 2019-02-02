@@ -13,13 +13,7 @@
             <label for="status">Status:</label>
         </div>
         <div class="col-11">
-            <select id="status" name="status" class="form-control">
-                <option value="in_process">In process</option>
-                <option value="pending">Pending</option>
-                <option value="finished">Finished</option>
-                <option value="closed">Closed</option>
-                <option value="cancelled">Cancelled</option>
-            </select>
+            <input name="status" type="checkbox" <?php if((int)$task->status==1) echo 'checked'; ?>>
         </div>
     </div>
     <br>

@@ -74,7 +74,6 @@ class BaseORM
         $keys_str .= ")";
         $values_str .= ")";
         $insert_sql .= $keys_str . " VALUES" . $values_str;
-        echo $insert_sql;
         $this->db->exec($insert_sql);
     }
     public function update($id,array  $data)
